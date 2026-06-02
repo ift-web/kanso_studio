@@ -126,3 +126,19 @@
     el.addEventListener('dragstart', stop, { capture: true });
   });
 })();
+
+
+// ── EXTRA CONTENT PROTECTION ──
+(function(){
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); }, {capture:true});
+  document.addEventListener('dragstart', function(e){ e.preventDefault(); }, {capture:true});
+  document.addEventListener('selectstart', function(e){
+    const tag = (e.target && e.target.tagName || '').toLowerCase();
+    if (!['input','textarea','select','option'].includes(tag)) e.preventDefault();
+  }, {capture:true});
+  document.addEventListener('keydown', function(e){
+    const key = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && ['s','u','p','c','x','a'].includes(key)) e.preventDefault();
+    if (key === 'f12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(key))) e.preventDefault();
+  }, {capture:true});
+})();

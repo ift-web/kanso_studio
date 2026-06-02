@@ -239,10 +239,10 @@
   .hero-tile.wide { grid-column: span 2; }
 
   /* Placeholder colored tiles instead of images */
-  .tile-1 { background: linear-gradient(135deg, #2a5c45 0%, #1F2937 100%); }
+  .tile-1 { background: linear-gradient(135deg, #374151 0%, #1F2937 100%); }
   .tile-2 { background: linear-gradient(135deg, #c9a86a 0%, #b8934f 100%); }
   .tile-3 { background: linear-gradient(135deg, #e8e0d4 0%, #d4c9b8 100%); }
-  .tile-4 { background: linear-gradient(135deg, #3d7a5e 0%, #2a5c45 100%); }
+  .tile-4 { background: linear-gradient(135deg, #8A7A68 0%, #374151 100%); }
   .tile-5 { background: linear-gradient(135deg, #f0ebe3 0%, #e8e0d4 100%); }
   
   .tile-label {

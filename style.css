@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(250,248,245,0.92);
+    background: rgba(250,248,243,0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
@@ -239,11 +239,11 @@
   .hero-tile.wide { grid-column: span 2; }
 
   /* Placeholder colored tiles instead of images */
-  .tile-1 { background: linear-gradient(135deg, #374151 0%, #1F2937 100%); }
-  .tile-2 { background: linear-gradient(135deg, #B08B63 0%, #9A7652 100%); }
-  .tile-3 { background: linear-gradient(135deg, #E7E2DB 0%, #D8CEC2 100%); }
-  .tile-4 { background: linear-gradient(135deg, #4B5563 0%, #374151 100%); }
-  .tile-5 { background: linear-gradient(135deg, #F4EFE8 0%, #E7E2DB 100%); }
+  .tile-1 { background: linear-gradient(135deg, #2a5c45 0%, #1F2937 100%); }
+  .tile-2 { background: linear-gradient(135deg, #c9a86a 0%, #b8934f 100%); }
+  .tile-3 { background: linear-gradient(135deg, #e8e0d4 0%, #d4c9b8 100%); }
+  .tile-4 { background: linear-gradient(135deg, #3d7a5e 0%, #2a5c45 100%); }
+  .tile-5 { background: linear-gradient(135deg, #f0ebe3 0%, #e8e0d4 100%); }
   
   .tile-label {
     position: absolute;
@@ -529,7 +529,7 @@
     transition: background 0.4s;
   }
   .work-item:hover .work-overlay {
-    background: rgba(31,41,55,0.78);
+    background: rgba(31,41,55,0.72);
   }
   .work-info {
     transform: translateY(12px);
@@ -556,15 +556,15 @@
   .work-hidden { display: none; }
 
   /* Color Palette for work tiles */
-  .wt-green-dark { background: linear-gradient(145deg, #1F2937 0%, #111827 100%); }
-  .wt-gold { background: linear-gradient(145deg, #B08B63 0%, #8B6F4E 100%); }
-  .wt-sage { background: linear-gradient(145deg, #6B7280 0%, #4B5563 100%); }
-  .wt-cream { background: linear-gradient(145deg, #EFEAE3 0%, #DCD4CA 100%); }
-  .wt-warm { background: linear-gradient(145deg, #C2AE98 0%, #9B8068 100%); }
-  .wt-deep { background: linear-gradient(145deg, #374151 0%, #111827 100%); }
-  .wt-light { background: linear-gradient(145deg, #F6F2EC 0%, #E9E1D8 100%); }
-  .wt-terracotta { background: linear-gradient(145deg, #B08B63 0%, #7C5E42 100%); }
-  .wt-moss { background: linear-gradient(145deg, #8A9484 0%, #5B665A 100%); }
+  .wt-green-dark { background: linear-gradient(145deg, #1F2937 0%, #0d3224 100%); }
+  .wt-gold { background: linear-gradient(145deg, #c9a86a 0%, #a8884a 100%); }
+  .wt-sage { background: linear-gradient(145deg, #4a7a62 0%, #2d5e47 100%); }
+  .wt-cream { background: linear-gradient(145deg, #ede7dc 0%, #ddd4c7 100%); }
+  .wt-warm { background: linear-gradient(145deg, #c4b49a 0%, #a89276 100%); }
+  .wt-deep { background: linear-gradient(145deg, #2b4a3b 0%, #1a3028 100%); }
+  .wt-light { background: linear-gradient(145deg, #f5f0e8 0%, #ede6d9 100%); }
+  .wt-terracotta { background: linear-gradient(145deg, #b8845a 0%, #8f6238 100%); }
+  .wt-moss { background: linear-gradient(145deg, #5c7a56 0%, #3d5c38 100%); }
 
   /* ── STATS ── */
   #stats {
@@ -1087,7 +1087,16 @@
 
   /* ── MOBILE ── */
   @media (max-width: 1024px) {
-    :root { --section-gap: 100px; }
+    :root {
+    --primary: #1F2937;
+    --accent: #B08B63;
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --border: #E7E2DB;
+    --section-gap: 140px;
+  }
     nav { padding: 0 32px; }
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
@@ -1126,7 +1135,16 @@
   }
 
   @media (max-width: 640px) {
-    :root { --section-gap: 80px; }
+    :root {
+    --primary: #1F2937;
+    --accent: #B08B63;
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --border: #E7E2DB;
+    --section-gap: 140px;
+  }
     .services-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr; }
     .works-grid { grid-template-columns: 1fr; }
@@ -1188,3 +1206,7 @@ input, textarea, select, button, label {
   user-select: text;
   pointer-events: auto;
 }
+
+
+/* Safety: keep all text visible even if JavaScript is delayed or blocked */
+.reveal { opacity: 1; transform: none; }

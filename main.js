@@ -142,3 +142,43 @@
     if (key === 'f12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(key))) e.preventDefault();
   }, {capture:true});
 })();
+
+
+// ── AUTO SELECT PLAN FROM PLAN BUTTONS ──
+(function () {
+  const planButtons = document.querySelectorAll('.plan-btn');
+
+  planButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const selectedPlan = btn.dataset.plan || '尚未確定';
+      const selectedType = btn.dataset.type || '尚未確定';
+
+      const planSelect = document.getElementById('fplan');
+      const typeSelect = document.getElementById('fcooperation');
+
+      if (planSelect) {
+        planSelect.value = selectedPlan;
+      }
+
+      if (typeSelect) {
+        typeSelect.value = selectedType;
+      }
+    });
+  });
+
+  const generalStartLinks = document.querySelectorAll('a[href="#contact"]:not(.plan-btn)');
+  generalStartLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      const planSelect = document.getElementById('fplan');
+      const typeSelect = document.getElementById('fcooperation');
+
+      if (planSelect && !planSelect.value) {
+        planSelect.value = '尚未確定';
+      }
+
+      if (typeSelect && !typeSelect.value) {
+        typeSelect.value = '尚未確定';
+      }
+    });
+  });
+})();

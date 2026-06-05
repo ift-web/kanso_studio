@@ -217,7 +217,7 @@
 <div class="plan-line"></div>
 <p class="plan-desc">適合剛起步或正在整理品牌形象的品牌，建立清楚的視覺基礎與必要設計素材。</p>
 <ul class="plan-features"><li>品牌識別基礎</li><li>核心視覺方向</li><li>社群或網站基礎素材</li><li>標準專案時程</li></ul>
-<a class="plan-btn" href="#contact">開始合作</a>
+<a class="plan-btn" href="#contact" data-plan="基礎合作" data-type="長期合作">開始合作</a>
 </div>
 <div class="plan-card featured reveal reveal-delay-1">
 <span class="plan-badge">Growth Support</span>
@@ -225,7 +225,7 @@
 <div class="plan-line"></div>
 <p class="plan-desc">適合有固定行銷、內容與電商素材需求的品牌，提供穩定且可持續的設計支援。</p>
 <ul class="plan-features"><li>活動與內容視覺</li><li>電商與銷售素材</li><li>優先排程</li><li>長期視覺一致性</li></ul>
-<a class="plan-btn" href="#contact">開始合作</a>
+<a class="plan-btn" href="#contact" data-plan="長期支援" data-type="長期合作">開始合作</a>
 </div>
 <div class="plan-card reveal reveal-delay-2">
 <span class="plan-badge">Creative Partner</span>
@@ -233,7 +233,7 @@
 <div class="plan-line"></div>
 <p class="plan-desc">適合需要頻繁製作視覺、產品上市素材與策略方向的品牌，提供更接近長期夥伴的合作模式。</p>
 <ul class="plan-features"><li>多通路設計支援</li><li>上市與活動視覺系統</li><li>創意方向支援</li><li>專屬合作流程</li></ul>
-<a class="plan-btn" href="#contact">開始合作</a>
+<a class="plan-btn" href="#contact" data-plan="品牌夥伴" data-type="長期合作">開始合作</a>
 </div>
 </div>
 </section>
@@ -263,6 +263,26 @@
 <label class="form-label" for="email">電子郵件</label>
 <input class="form-input" id="email" name="email" placeholder="請填寫您的電子郵件" required="" type="email"/>
 </div>
+<div class="form-group">
+<label class="form-label" for="cooperation">合作類型</label>
+<select class="form-select" id="fcooperation" name="cooperation" required>
+<option value="">請選擇合作類型</option>
+<option value="單次合作">單次合作</option>
+<option value="長期合作">長期合作</option>
+<option value="尚未確定">尚未確定，想先討論</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label" for="plan">合作方案</label>
+<select class="form-select" id="fplan" name="plan">
+<option value="尚未確定">尚未確定</option>
+<option value="單次合作">單次合作</option>
+<option value="基礎合作">基礎合作</option>
+<option value="長期支援">長期支援</option>
+<option value="品牌夥伴">品牌夥伴</option>
+</select>
+</div>
+
 <div class="form-group">
 <label class="form-label" for="service">服務項目</label>
 <select class="form-select" id="service" name="service"><option value="">請選擇服務項目</option><option>品牌識別設計</option><option>電商視覺設計</option><option>網站設計</option><option>活動與廣告視覺</option><option>創意統籌</option><option>長期設計支援</option><option>其他需求</option></select>

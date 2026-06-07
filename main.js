@@ -182,3 +182,119 @@
     });
   });
 })();
+
+
+// ── WORK MODAL + BACK TO TOP ──
+(function () {
+  const workData = {
+    'aurelis-website': {
+      category: 'Website Design',
+      title: 'AURELIS Skincare',
+      subtitle: 'E-commerce Website Design',
+      image: 'images/aurelis-ecommerce-website.jpg',
+      desc: '為高端保養品牌規劃桌機與行動版網站視覺，整合品牌敘事、產品展示與購物轉換，讓使用者能快速理解產品價值並完成下一步行動。',
+      services: ['E-commerce Design', 'UI Design', 'Mobile Layout', 'Creative Direction']
+    },
+    'aurelis-identity': {
+      category: 'Brand Identity',
+      title: 'AURELIS Skincare',
+      subtitle: 'Brand Identity System',
+      image: 'images/aurelis-brand-identity.jpg',
+      desc: '建立完整品牌識別系統，包含品牌規範、名片、信紙與包裝應用，讓品牌在不同接觸點都能維持一致且高端的視覺形象。',
+      services: ['Brand Identity', 'Visual System', 'Stationery', 'Packaging Application']
+    },
+    'monsoon-roasters': {
+      category: 'Coffee Brand Identity',
+      title: 'MONSOON ROASTERS',
+      subtitle: 'Coffee Brand Identity',
+      image: 'images/monsoon-roasters.jpg',
+      desc: '為精品咖啡品牌建立沉穩、有記憶點的品牌識別，延伸至咖啡包裝、杯款、名片與店面招牌，呈現專業且具有社群感的品牌體驗。',
+      services: ['Brand Identity', 'Logo Design', 'Packaging', 'Signage', 'Brand Application']
+    },
+    'mori-dining': {
+      category: 'Restaurant Branding',
+      title: 'MORI DINING',
+      subtitle: 'Restaurant Brand Identity',
+      image: 'images/mori-dining.jpg',
+      desc: '為現代日式餐廳打造品牌識別系統，透過簡潔標誌、深色質感與印刷物應用，塑造高端、安靜且具東方美學的餐飲品牌形象。',
+      services: ['Restaurant Branding', 'Logo Design', 'Menu Design', 'Packaging', 'Print Design']
+    },
+    'lumiere-spa': {
+      category: 'Menu Design',
+      title: 'LUMIÈRE SPA',
+      subtitle: 'Spa Service Menu Design',
+      image: 'images/lumiere-spa-menu.jpg',
+      desc: '為精品 SPA 品牌設計療程菜單與服務導覽，透過清晰資訊架構、溫潤色彩與自然元素，提升顧客閱讀體驗與品牌高級感。',
+      services: ['Menu Design', 'Editorial Design', 'Print Design', 'Information Design', 'Brand Collateral']
+    },
+    'radiance-campaign': {
+      category: 'Campaign Design',
+      title: 'Radiance Redefined',
+      subtitle: 'Advertising Campaign Design',
+      image: 'images/aurelis-campaign-system.jpg',
+      desc: '為新品上市活動建立多通路廣告素材，包含 Meta Ads、Instagram Stories、Google Display Ads 與網站 Banner，確保各平台視覺一致並支援轉換。',
+      services: ['Campaign Visuals', 'Meta Ads', 'Banner Design', 'Landing Visual', 'Art Direction']
+    }
+  };
+
+  const modal = document.getElementById('workModal');
+  if (modal) {
+    const modalImage = document.getElementById('modalImage');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalServices = document.getElementById('modalServices');
+
+    const openModal = (key) => {
+      const item = workData[key];
+      if (!item) return;
+      modalImage.src = item.image;
+      modalImage.alt = item.title + '｜' + item.subtitle;
+      modalCategory.textContent = item.category;
+      modalTitle.textContent = item.title;
+      modalSubtitle.textContent = item.subtitle;
+      modalDesc.textContent = item.desc;
+      modalServices.innerHTML = item.services.map(service => `<span>${service}</span>`).join('');
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      modalImage.src = '';
+    };
+
+    document.querySelectorAll('[data-work]').forEach(card => {
+      card.addEventListener('click', () => openModal(card.dataset.work));
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openModal(card.dataset.work);
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-modal-close]').forEach(btn => {
+      btn.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+  }
+
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();

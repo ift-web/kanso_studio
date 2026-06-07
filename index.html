@@ -9,18 +9,12 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;display=swap" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet"/>
-
-<style id="formspree-form-state-style">
-.form-error { border-bottom-color: #B85C5C !important; }
-.form-submit:disabled { opacity: 0.55; cursor: wait; }
-</style>
-
 </head>
 <body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 <!-- NAV -->
 <nav id="main-nav">
 <a class="nav-logo" href="#">
-<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="LOGO_PLACEHOLDER"/>
+<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="images/kanso-logo.png"/>
 </a>
 <ul class="nav-links">
 <li><a href="#works">作品案例</a></li>
@@ -260,7 +254,7 @@
 </div>
 <div class="reveal reveal-delay-1">
 <div class="contact-form">
-<form id="contact-form">
+<form action="https://formspree.io/f/xvzdegqv" id="contact-form" method="POST">
 <div class="form-group">
 <label class="form-label" for="name">姓名</label>
 <input class="form-input" id="name" name="name" placeholder="您的姓名或品牌名稱" required="" type="text"/>
@@ -303,7 +297,7 @@
 </div>
 <button class="form-submit" type="submit">開始合作</button>
 </form>
-<div class="form-success" id="form-success" style="display:none;">
+<div class="form-success" id="form-success">
 <p>謝謝您的來信。<br/>我們會盡快與您聯繫。</p>
 </div>
 </div>
@@ -315,7 +309,7 @@
 <div class="footer-inner">
 <div class="footer-top">
 <div class="footer-brand">
-<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="LOGO_PLACEHOLDER"/>
+<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="images/kanso-logo.png"/>
 <p class="footer-tagline">為成長中的品牌<br/>提供穩定設計支援。</p>
 <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:20px;font-style:italic;font-family:'Cormorant Garamond',serif;">Design with Clarity. Grow with Ease.</p>
 </div>
@@ -338,86 +332,6 @@
 </div>
 </footer>
 <script src="main.js"></script>
-
-<script id="formspree-fetch-script">
-(function () {
-  const FORM_ENDPOINT = 'https://formspree.io/f/xvzdegqv';
-
-  function valueOf(id) {
-    const el = document.getElementById(id);
-    return el ? el.value.trim() : '';
-  }
-
-  function markError(el) {
-    if (!el) return;
-    el.classList.add('form-error');
-    setTimeout(() => el.classList.remove('form-error'), 2000);
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('contact-form');
-    const success = document.getElementById('form-success');
-    const btn = form ? form.querySelector('.form-submit') : null;
-
-    if (!form || !btn) return;
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const name = document.getElementById('name');
-      const email = document.getElementById('email');
-      const message = document.getElementById('message');
-
-      let ok = true;
-      [name, email, message].forEach(function (field) {
-        if (!field || !field.value.trim()) {
-          markError(field);
-          ok = false;
-        }
-      });
-
-      if (!ok) return;
-
-      const originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = '傳送中…';
-
-      fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: valueOf('name'),
-          email: valueOf('email'),
-          cooperation: valueOf('fcooperation'),
-          plan: valueOf('fplan'),
-          service: valueOf('service'),
-          budget: valueOf('budget'),
-          message: valueOf('message')
-        })
-      })
-      .then(function (response) {
-        if (response.ok) {
-          form.style.display = 'none';
-          if (success) success.style.display = 'block';
-        } else {
-          btn.disabled = false;
-          btn.textContent = '送出失敗，請重試';
-          setTimeout(() => btn.textContent = originalText, 2200);
-        }
-      })
-      .catch(function () {
-        btn.disabled = false;
-        btn.textContent = '網路錯誤，請重試';
-        setTimeout(() => btn.textContent = originalText, 2200);
-      });
-    });
-  });
-})();
-</script>
-
 <script id="kanso-protection-script">
 (function () {
   const stop = function (event) {

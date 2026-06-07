@@ -10,11 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;display=swap" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet"/>
 
-<style id="formspree-ajax-style">
-  .form-error { border-bottom-color: #B42318 !important; }
-  .form-submit[disabled] { opacity: .6; cursor: not-allowed; }
-  #form-success { display: none; }
+<style id="formspree-form-state-style">
+.form-error { border-bottom-color: #B85C5C !important; }
+.form-submit:disabled { opacity: 0.55; cursor: wait; }
 </style>
+
 </head>
 <body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 <!-- NAV -->
@@ -260,7 +260,7 @@
 </div>
 <div class="reveal reveal-delay-1">
 <div class="contact-form">
-<form id="contact-form" novalidate>
+<form id="contact-form">
 <div class="form-group">
 <label class="form-label" for="name">姓名</label>
 <input class="form-input" id="name" name="name" placeholder="您的姓名或品牌名稱" required="" type="text"/>
@@ -299,12 +299,12 @@
 </div>
 <div class="form-group">
 <label class="form-label" for="message">需求內容</label>
-<textarea class="form-textarea" id="message" name="message" placeholder="請簡單描述您的品牌背景與設計需求…"></textarea>
+<textarea class="form-textarea" id="message" name="message" placeholder="請簡單描述您的品牌背景與設計需求…" required></textarea>
 </div>
 <button class="form-submit" type="submit">開始合作</button>
 </form>
-<div class="form-success" id="form-success">
-<p>Thank you.<br/>我們已收到您的需求，將於 48 小時內與您聯繫。</p>
+<div class="form-success" id="form-success" style="display:none;">
+<p>謝謝您的來信。<br/>我們會盡快與您聯繫。</p>
 </div>
 </div>
 </div>
@@ -339,90 +339,85 @@
 </footer>
 <script src="main.js"></script>
 
-<script id="formspree-ajax-script">
+<script id="formspree-fetch-script">
 (function () {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
+  const FORM_ENDPOINT = 'https://formspree.io/f/xvzdegqv';
 
-  const endpoint = 'https://formspree.io/f/xvzdegqv';
-  const successBox = document.getElementById('form-success');
-  const submitBtn = form.querySelector('.form-submit');
-  const originalButtonText = submitBtn ? submitBtn.textContent : '開始合作';
-
-  function getField(id) {
-    return document.getElementById(id);
+  function valueOf(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
   }
 
-  function markError(field) {
-    if (!field) return;
-    field.classList.add('form-error');
-    setTimeout(function () {
-      field.classList.remove('form-error');
-    }, 2000);
+  function markError(el) {
+    if (!el) return;
+    el.classList.add('form-error');
+    setTimeout(() => el.classList.remove('form-error'), 2000);
   }
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    const btn = form ? form.querySelector('.form-submit') : null;
 
-    const name = getField('name');
-    const email = getField('email');
-    const message = getField('message');
-    const requiredFields = [name, email, message];
+    if (!form || !btn) return;
 
-    let isValid = true;
-    requiredFields.forEach(function (field) {
-      if (!field || !field.value.trim()) {
-        markError(field);
-        isValid = false;
-      }
-    });
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-    if (!isValid) return;
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
 
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = '傳送中…';
-    }
-
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        _subject: 'Kanso Studio Website Inquiry',
-        name: name.value.trim(),
-        email: email.value.trim(),
-        cooperation: getField('fcooperation') ? getField('fcooperation').value : '',
-        plan: getField('fplan') ? getField('fplan').value : '',
-        service: getField('service') ? getField('service').value : '',
-        budget: getField('budget') ? getField('budget').value : '',
-        message: message.value.trim()
-      })
-    })
-    .then(function (response) {
-      if (response.ok) {
-        form.style.display = 'none';
-        if (successBox) successBox.style.display = 'block';
-      } else {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = '送出失敗，請重試';
-          setTimeout(function () { submitBtn.textContent = originalButtonText; }, 2200);
+      let ok = true;
+      [name, email, message].forEach(function (field) {
+        if (!field || !field.value.trim()) {
+          markError(field);
+          ok = false;
         }
-      }
-    })
-    .catch(function () {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = '網路錯誤，請重試';
-        setTimeout(function () { submitBtn.textContent = originalButtonText; }, 2200);
-      }
+      });
+
+      if (!ok) return;
+
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = '傳送中…';
+
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: valueOf('name'),
+          email: valueOf('email'),
+          cooperation: valueOf('fcooperation'),
+          plan: valueOf('fplan'),
+          service: valueOf('service'),
+          budget: valueOf('budget'),
+          message: valueOf('message')
+        })
+      })
+      .then(function (response) {
+        if (response.ok) {
+          form.style.display = 'none';
+          if (success) success.style.display = 'block';
+        } else {
+          btn.disabled = false;
+          btn.textContent = '送出失敗，請重試';
+          setTimeout(() => btn.textContent = originalText, 2200);
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = '網路錯誤，請重試';
+        setTimeout(() => btn.textContent = originalText, 2200);
+      });
     });
   });
 })();
 </script>
+
 <script id="kanso-protection-script">
 (function () {
   const stop = function (event) {

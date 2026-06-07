@@ -68,76 +68,31 @@
     });
   });
 
-  // ── CONTACT FORM / FORMSPREE ──
+  // ── CONTACT FORM ──
   const form = document.getElementById("contact-form");
   const successMsg = document.getElementById("form-success");
-
   if (form) {
-    form.addEventListener("submit", async function (e) {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      const name = document.getElementById("name");
-      const email = document.getElementById("email");
-      const message = document.getElementById("message");
-      const service = document.getElementById("service");
-      const budget = document.getElementById("budget");
-      const cooperation = document.getElementById("fcooperation");
-      const plan = document.getElementById("fplan");
       const btn = form.querySelector(".form-submit");
-
-      let ok = true;
-      [name, email, message].forEach(function (field) {
-        if (!field || !field.value.trim()) {
-          if (field) {
-            field.classList.add("form-error");
-            setTimeout(function () {
-              field.classList.remove("form-error");
-            }, 2000);
-          }
-          ok = false;
-        }
-      });
-
-      if (!ok) return;
-
-      const originalText = btn.textContent;
+      btn.textContent = "傳送中...";
       btn.disabled = true;
-      btn.textContent = "傳送中…";
-
       try {
-        const res = await fetch("https://formspree.io/f/xvzdegqv", {
+        const res = await fetch(form.action, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            name: name.value.trim(),
-            email: email.value.trim(),
-            cooperation: cooperation ? cooperation.value : "",
-            plan: plan ? plan.value : "",
-            service: service ? service.value : "",
-            budget: budget ? budget.value : "",
-            message: message.value.trim()
-          })
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
         });
-
         if (res.ok) {
           form.style.display = "none";
-          if (successMsg) successMsg.style.display = "block";
+          successMsg.style.display = "block";
         } else {
+          btn.textContent = "發送失敗，請重試";
           btn.disabled = false;
-          btn.textContent = "送出失敗，請重試";
-          setTimeout(function () {
-            btn.textContent = originalText;
-          }, 2500);
         }
-      } catch (error) {
+      } catch {
+        btn.textContent = "發送失敗，請重試";
         btn.disabled = false;
-        btn.textContent = "網路錯誤，請重試";
-        setTimeout(function () {
-          btn.textContent = originalText;
-        }, 2500);
       }
     });
   }
@@ -186,4 +141,44 @@
     if ((e.ctrlKey || e.metaKey) && ['s','u','p','c','x','a'].includes(key)) e.preventDefault();
     if (key === 'f12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(key))) e.preventDefault();
   }, {capture:true});
+})();
+
+
+// ── AUTO SELECT PLAN FROM PLAN BUTTONS ──
+(function () {
+  const planButtons = document.querySelectorAll('.plan-btn');
+
+  planButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const selectedPlan = btn.dataset.plan || '尚未確定';
+      const selectedType = btn.dataset.type || '尚未確定';
+
+      const planSelect = document.getElementById('fplan');
+      const typeSelect = document.getElementById('fcooperation');
+
+      if (planSelect) {
+        planSelect.value = selectedPlan;
+      }
+
+      if (typeSelect) {
+        typeSelect.value = selectedType;
+      }
+    });
+  });
+
+  const generalStartLinks = document.querySelectorAll('a[href="#contact"]:not(.plan-btn)');
+  generalStartLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      const planSelect = document.getElementById('fplan');
+      const typeSelect = document.getElementById('fcooperation');
+
+      if (planSelect && !planSelect.value) {
+        planSelect.value = '尚未確定';
+      }
+
+      if (typeSelect && !typeSelect.value) {
+        typeSelect.value = '尚未確定';
+      }
+    });
+  });
 })();

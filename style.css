@@ -1265,10 +1265,243 @@ input, textarea, select, button, label {
 }
 
 
-/* Footer symbol logo: use K symbol only, not full wordmark */
+/* ── CASE STUDY HOMEPAGE GRID ── */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 32px;
+}
+.case-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  grid-column: auto !important;
+}
+.case-thumb {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  height: auto !important;
+  overflow: hidden;
+  background: var(--surface);
+}
+.case-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s;
+}
+.case-card:hover .case-thumb img {
+  transform: scale(1.035);
+  filter: brightness(0.86);
+}
+.case-card-body {
+  padding-top: 22px;
+  border-top: 1px solid transparent;
+}
+.case-number {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.case-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.case-card-title span { color: var(--muted); }
+.case-card-desc {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+.case-view {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 6px;
+}
 .footer-symbol-logo {
   width: 84px;
   height: 84px;
   object-fit: contain;
   opacity: 0.9;
+}
+
+/* ── CASE DETAIL PAGES ── */
+.case-detail-main {
+  padding: 130px 60px 100px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.case-back {
+  display: inline-block;
+  margin-bottom: 64px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+.case-back:hover { color: var(--accent); border-color: var(--accent); }
+.case-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 72px;
+}
+.case-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+.case-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(46px, 6vw, 92px);
+  font-weight: 300;
+  line-height: 0.98;
+  color: var(--primary);
+  margin-bottom: 28px;
+}
+.case-title span { color: var(--muted); }
+.case-lead {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 2;
+  max-width: 680px;
+}
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.case-meta div {
+  padding: 24px 22px;
+  border-right: 1px solid var(--border);
+}
+.case-meta div:last-child { border-right: none; }
+.case-meta-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.case-meta-value { color: var(--primary); font-size: 15px; }
+.case-visual {
+  margin: 0 0 90px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.case-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+.case-content-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 80px;
+  margin-bottom: 90px;
+}
+.case-section-kicker {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.case-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--primary);
+}
+.case-copy-block {
+  display: grid;
+  gap: 36px;
+}
+.case-copy-block h3 {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.case-copy-block p,
+.case-deliverables li {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 2;
+}
+.case-deliverables {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  padding: 0;
+}
+.case-deliverables li {
+  padding-left: 20px;
+  position: relative;
+}
+.case-deliverables li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: absolute;
+  left: 0;
+  top: 15px;
+}
+.case-next {
+  border-top: 1px solid var(--border);
+  padding-top: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.case-next a {
+  color: var(--primary);
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1;
+}
+.case-next span {
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .case-grid { grid-template-columns: 1fr; gap: 48px; }
+  .case-detail-main { padding: 110px 24px 72px; }
+  .case-hero, .case-content-grid { grid-template-columns: 1fr; gap: 42px; }
+  .case-meta { grid-template-columns: 1fr; }
+  .case-meta div { border-right: none; border-bottom: 1px solid var(--border); }
+  .case-meta div:last-child { border-bottom: none; }
+  .case-visual { margin-bottom: 64px; }
+  .case-next { align-items: flex-start; flex-direction: column; }
 }

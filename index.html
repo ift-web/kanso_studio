@@ -9,12 +9,18 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;display=swap" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet"/>
+
+<style id="formspree-ajax-style">
+  .form-error { border-bottom-color: #B42318 !important; }
+  .form-submit[disabled] { opacity: .6; cursor: not-allowed; }
+  #form-success { display: none; }
+</style>
 </head>
 <body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 <!-- NAV -->
 <nav id="main-nav">
 <a class="nav-logo" href="#">
-<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="images/kanso-logo.png"/>
+<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="LOGO_PLACEHOLDER"/>
 </a>
 <ul class="nav-links">
 <li><a href="#works">作品案例</a></li>
@@ -254,7 +260,7 @@
 </div>
 <div class="reveal reveal-delay-1">
 <div class="contact-form">
-<form action="https://formspree.io/f/xvzdegqv" id="contact-form" method="POST">
+<form id="contact-form" novalidate>
 <div class="form-group">
 <label class="form-label" for="name">姓名</label>
 <input class="form-input" id="name" name="name" placeholder="您的姓名或品牌名稱" required="" type="text"/>
@@ -293,12 +299,12 @@
 </div>
 <div class="form-group">
 <label class="form-label" for="message">需求內容</label>
-<textarea class="form-textarea" id="message" name="message" placeholder="請簡單描述您的品牌背景與設計需求…" required></textarea>
+<textarea class="form-textarea" id="message" name="message" placeholder="請簡單描述您的品牌背景與設計需求…"></textarea>
 </div>
 <button class="form-submit" type="submit">開始合作</button>
 </form>
 <div class="form-success" id="form-success">
-<p>謝謝您的來信。<br/>我們會盡快與您聯繫。</p>
+<p>Thank you.<br/>我們已收到您的需求，將於 48 小時內與您聯繫。</p>
 </div>
 </div>
 </div>
@@ -309,7 +315,7 @@
 <div class="footer-inner">
 <div class="footer-top">
 <div class="footer-brand">
-<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="images/kanso-logo.png"/>
+<img alt="Kanso Studio" draggable="false" oncontextmenu="return false;" src="LOGO_PLACEHOLDER"/>
 <p class="footer-tagline">為成長中的品牌<br/>提供穩定設計支援。</p>
 <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:20px;font-style:italic;font-family:'Cormorant Garamond',serif;">Design with Clarity. Grow with Ease.</p>
 </div>
@@ -332,6 +338,91 @@
 </div>
 </footer>
 <script src="main.js"></script>
+
+<script id="formspree-ajax-script">
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const endpoint = 'https://formspree.io/f/xvzdegqv';
+  const successBox = document.getElementById('form-success');
+  const submitBtn = form.querySelector('.form-submit');
+  const originalButtonText = submitBtn ? submitBtn.textContent : '開始合作';
+
+  function getField(id) {
+    return document.getElementById(id);
+  }
+
+  function markError(field) {
+    if (!field) return;
+    field.classList.add('form-error');
+    setTimeout(function () {
+      field.classList.remove('form-error');
+    }, 2000);
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const name = getField('name');
+    const email = getField('email');
+    const message = getField('message');
+    const requiredFields = [name, email, message];
+
+    let isValid = true;
+    requiredFields.forEach(function (field) {
+      if (!field || !field.value.trim()) {
+        markError(field);
+        isValid = false;
+      }
+    });
+
+    if (!isValid) return;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = '傳送中…';
+    }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'Kanso Studio Website Inquiry',
+        name: name.value.trim(),
+        email: email.value.trim(),
+        cooperation: getField('fcooperation') ? getField('fcooperation').value : '',
+        plan: getField('fplan') ? getField('fplan').value : '',
+        service: getField('service') ? getField('service').value : '',
+        budget: getField('budget') ? getField('budget').value : '',
+        message: message.value.trim()
+      })
+    })
+    .then(function (response) {
+      if (response.ok) {
+        form.style.display = 'none';
+        if (successBox) successBox.style.display = 'block';
+      } else {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '送出失敗，請重試';
+          setTimeout(function () { submitBtn.textContent = originalButtonText; }, 2200);
+        }
+      }
+    })
+    .catch(function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '網路錯誤，請重試';
+        setTimeout(function () { submitBtn.textContent = originalButtonText; }, 2200);
+      }
+    });
+  });
+})();
+</script>
 <script id="kanso-protection-script">
 (function () {
   const stop = function (event) {

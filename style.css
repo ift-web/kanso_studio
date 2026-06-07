@@ -1263,3 +1263,12 @@ input, textarea, select, button, label {
   .work-desc { font-size: 13px; line-height: 1.7; }
   .work-overlay { padding: 22px; }
 }
+
+
+/* Footer symbol logo: use K symbol only, not full wordmark */
+.footer-symbol-logo {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  opacity: 0.9;
+}

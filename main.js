@@ -227,6 +227,54 @@
       desc: '為精品 SPA 品牌設計療程菜單與服務導覽，透過清晰資訊架構、溫潤色彩與自然元素，提升顧客閱讀體驗與品牌高級感。',
       services: ['Menu Design', 'Editorial Design', 'Print Design', 'Information Design', 'Brand Collateral']
     },
+    'yohaku-lifestyle-store': {
+      category: 'Website Design',
+      title: 'YOHAKU Lifestyle Store',
+      subtitle: 'E-commerce Website Design',
+      image: 'images/yohaku-lifestyle-store.jpg',
+      desc: '以日系極簡美學為核心，規劃首頁視覺、商品展示與品牌敘事架構，讓電商網站兼具品牌質感、商品理解與清楚的購買動線。',
+      services: ['Website Design', 'E-commerce Design', 'UI Design', 'Japanese Style']
+    },
+    'yohaku-products': {
+      category: 'E-commerce Design',
+      title: 'YOHAKU Product Showcase',
+      subtitle: 'E-commerce Visual Design',
+      image: 'images/yohaku-product-showcase.jpg',
+      desc: '為生活用品商品展示頁規劃資訊層級，整合產品照片、品名、價格與短文案，協助使用者更快速做出購買判斷。',
+      services: ['E-commerce Visual', 'Product Showcase', 'Layout Design', 'Conversion Design']
+    },
+    'yohaku-category': {
+      category: 'E-commerce Design',
+      title: 'YOHAKU Category Navigation',
+      subtitle: 'E-commerce Section Design',
+      image: 'images/yohaku-category-navigation.jpg',
+      desc: '透過分類導覽、品牌優勢與購物資訊區塊，建立清楚的瀏覽節奏，讓使用者能更直覺探索商品與服務內容。',
+      services: ['E-commerce Design', 'Category Navigation', 'Information Design', 'UI Section']
+    },
+    'flow-lifestyle-banner': {
+      category: 'E-commerce Design',
+      title: 'FLOW Lifestyle Banner',
+      subtitle: 'E-commerce Hero Visual',
+      image: 'images/flow-lifestyle-banner.jpg',
+      desc: '以自然生活感、柔和光影與清楚賣點規劃電商主視覺，讓品牌首頁能快速傳達商品氛圍與購買理由。',
+      services: ['Hero Banner', 'E-commerce Visual', 'Product Storytelling', 'Art Direction']
+    },
+    'anniversary-campaign': {
+      category: 'Campaign Design',
+      title: '5th Anniversary Campaign',
+      subtitle: 'Seasonal Promotion Design',
+      image: 'images/anniversary-campaign.jpg',
+      desc: '為週年慶檔期規劃活動主視覺，整合優惠訊息、贈品資訊與行動按鈕，讓品牌活動頁兼具質感與銷售導向。',
+      services: ['Campaign Visuals', 'Landing Page', 'Banner Design', 'Promotion Design']
+    },
+    'christmas-campaign': {
+      category: 'Campaign Design',
+      title: 'Christmas Gift Collection',
+      subtitle: 'Seasonal Campaign Design',
+      image: 'images/christmas-campaign.jpg',
+      desc: '節慶檔期活動頁設計，透過溫暖的禮品情境、節慶元素與明確優惠資訊，提升品牌節慶氛圍與購買意願。',
+      services: ['Holiday Campaign', 'Banner Design', 'E-commerce Visual', 'Seasonal Promotion']
+    },
     'radiance-campaign': {
       category: 'Campaign Design',
       title: 'Radiance Redefined',

@@ -1748,3 +1748,36 @@ body.modal-open { overflow: hidden; }
   .about-copy { margin-top: 22px; }
   .about-copy p { font-size: 16px; line-height: 1.9; margin-bottom: 14px; }
 }
+
+
+
+/* ── WORKS UPDATE: grouped project layout ── */
+.works-filter {
+  flex-wrap: wrap;
+}
+
+.case-grid {
+  align-items: stretch;
+}
+
+.case-card {
+  height: 100%;
+}
+
+.case-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.case-view {
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .works-filter {
+    gap: 10px;
+  }
+  .filter-btn {
+    white-space: nowrap;
+  }
+}

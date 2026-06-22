@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KANSO STUDIO — Sports Visual Design</title>
+<meta name="description" content="CHU Studio 是一間以品牌識別、視覺系統與商業美術為核心的創意設計工作室。">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* ── CHU STUDIO — STREETWEAR DESIGN SYSTEM ── */
+:root {
+  --black:  #0A0A0A;
+  --white:  #F0EEDD;
+  --red:    #FF2E2E;
+  --gold:   #C9A227;
+  --gray:   #1E1E1E;
+  --gray2:  #2E2E2E;
+  --muted:  #6A6A6A;
+  --border: rgba(240,238,221,0.1);
+  --gap:    140px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Grotesk','Noto Sans TC',sans-serif;
+  background:var(--black);color:var(--white);
+  font-size:16px;line-height:1.75;overflow-x:hidden;
+  user-select:none;-webkit-user-select:none;-ms-user-select:none;
+}
+img{user-select:none;-webkit-user-drag:none;pointer-events:none;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.accent{color:var(--red);}
+
+/* NAV */
+#main-nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:0 48px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,10,10,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+#main-nav.scrolled{border-bottom-color:var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.08em;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--red);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;font-weight:500;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{font-size:11px;letter-spacing:.18em;padding:9px 24px;background:var(--red);color:var(--white);text-decoration:none;font-weight:700;text-transform:uppercase;border:2px solid var(--red);transition:background .2s,color .2s;}
+.nav-cta:hover{background:transparent;color:var(--red);}
+.hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s;}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:var(--black);border-bottom:1px solid var(--border);z-index:998;padding:24px 48px;flex-direction:column;gap:20px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;font-weight:500;text-transform:uppercase;transition:color .2s;}
+.mobile-menu a:hover{color:var(--white);}
+
+/* HERO */
+#hero{min-height:100vh;padding:72px 48px 0;display:grid;grid-template-columns:1fr auto;grid-template-rows:1fr auto;position:relative;overflow:hidden;}
+.hero-content{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:center;padding:80px 0;position:relative;z-index:1;}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:32px;}
+.dot-red{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.85);}}
+.hero-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,180px);line-height:.9;letter-spacing:-.02em;color:var(--white);display:flex;flex-direction:column;margin-bottom:48px;}
+.hero-headline .line{display:block;overflow:hidden;animation:slideUp .8s cubic-bezier(.16,1,.3,1) both;}
+.line-1{animation-delay:.2s;}
+.line-2{animation-delay:.35s;color:var(--gray2);-webkit-text-stroke:2px var(--white);}
+.line-3{animation-delay:.5s;}
+@keyframes slideUp{from{transform:translateY(110%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.hero-sub-wrap{display:flex;flex-direction:column;gap:32px;}
+.hero-sub{font-size:15px;color:var(--muted);line-height:2;max-width:400px;font-weight:300;}
+.hero-ctas{display:flex;gap:16px;align-items:center;}
+.btn-primary{display:inline-block;padding:14px 36px;background:var(--red);color:var(--white);text-decoration:none;font-size:11px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;border:2px solid var(--red);transition:background .2s,color .2s,transform .15s;}
+.btn-primary:hover{background:transparent;color:var(--red);transform:translateY(-2px);}
+.btn-ghost{display:inline-block;padding:14px 0;color:var(--white);text-decoration:none;font-size:11px;letter-spacing:.18em;font-weight:500;text-transform:uppercase;border-bottom:1px solid var(--border);transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--red);color:var(--red);}
+.hero-side{grid-column:2;grid-row:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;padding:80px 0 80px 60px;position:relative;z-index:1;border-left:1px solid var(--border);margin-left:60px;}
+.hero-ticker{writing-mode:vertical-rl;font-size:9px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;display:flex;gap:16px;margin-bottom:auto;padding-top:80px;}
+.hero-ticker .sep{color:var(--red);}
+.hero-number-block{display:flex;flex-direction:column;align-items:flex-end;gap:20px;}
+.stat{display:flex;flex-direction:column;align-items:flex-end;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--white);}
+.plus{color:var(--red);font-size:36px;}
+.stat-label{font-size:9px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;}
+.stat-divider{width:1px;height:32px;background:var(--border);align-self:flex-end;}
+.scroll-indicator{grid-column:1;grid-row:2;display:flex;align-items:center;gap:12px;padding:24px 0;font-size:9px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;}
+.scroll-track{width:48px;height:1px;background:var(--border);position:relative;overflow:hidden;}
+.scroll-track::after{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;background:var(--red);animation:trackMove 2s ease-in-out infinite;}
+@keyframes trackMove{0%{left:-100%;}50%{left:0;}100%{left:100%;}}
+
+/* MARQUEE */
+.marquee-strip{background:var(--red);color:var(--white);padding:12px 0;overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-flex;gap:28px;animation:marquee 24s linear infinite;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;}
+.bullet{color:rgba(255,255,255,.5);}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* WORKS */
+#works{padding:var(--gap) 48px;max-width:1440px;margin:0 auto;}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;border-bottom:1px solid var(--border);padding-bottom:24px;}
+.section-label-wrap{display:flex;align-items:center;gap:16px;}
+.section-index{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--red);}
+.section-label{font-size:10px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,88px);line-height:.9;color:var(--white);}
+.section-title span{color:var(--gray2);-webkit-text-stroke:1px rgba(240,238,221,.3);}
+.works-filter{display:flex;gap:4px;margin-bottom:40px;flex-wrap:wrap;}
+.filter-btn{font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:8px 20px;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;font-weight:500;}
+.filter-btn:hover{color:var(--white);border-color:rgba(240,238,221,.3);}
+.filter-btn.active{background:var(--red);color:var(--white);border-color:var(--red);}
+.works-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.work-card{background:var(--gray);cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.work-card:hover{transform:scale(.99);z-index:2;}
+.work-card--wide{grid-column:span 2;}
+.work-thumb{aspect-ratio:16/10;overflow:hidden;position:relative;}
+.work-card--wide .work-thumb{aspect-ratio:21/9;}
+.work-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1);filter:grayscale(20%);}
+.work-card:hover .work-img img{transform:scale(1.04);filter:grayscale(0%);}
+.work-overlay{position:absolute;inset:0;background:rgba(10,10,10,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+.work-card:hover .work-overlay{opacity:1;}
+.work-view-text{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--white);font-weight:700;}
+.work-meta{padding:24px 28px;border-top:2px solid var(--card-color,var(--red));}
+.work-type{font-size:9px;letter-spacing:.22em;color:var(--card-color,var(--red));text-transform:uppercase;display:block;margin-bottom:8px;}
+.work-meta h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,32px);line-height:1;color:var(--white);letter-spacing:.02em;margin-bottom:10px;}
+.work-meta p{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* ABOUT */
+#about{padding:var(--gap) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.about-inner{max-width:1440px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:120px 1fr;gap:80px;align-items:start;}
+.about-label-col{display:flex;flex-direction:column;gap:16px;padding-top:8px;}
+.section-label-vert{writing-mode:vertical-rl;font-size:9px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;}
+.about-quote{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);line-height:1;color:var(--white);margin-bottom:40px;border-left:4px solid var(--red);padding-left:32px;}
+.about-body p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:16px;max-width:600px;}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+.about-tags span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:7px 16px;border:1px solid var(--border);color:var(--muted);}
+
+/* SERVICES */
+#services{padding:var(--gap) 48px;max-width:1440px;margin:0 auto;}
+.services-header{display:flex;align-items:flex-end;gap:24px;margin-bottom:64px;}
+.services-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,120px);line-height:.88;color:var(--white);}
+.services-list{display:flex;flex-direction:column;}
+.service-item{display:grid;grid-template-columns:64px 1fr auto;gap:32px;align-items:center;padding:32px 0;border-top:1px solid var(--border);transition:background .2s,padding .2s;}
+.service-item:hover{background:rgba(255,46,46,.04);padding-left:16px;padding-right:16px;margin:0 -16px;}
+.service-num{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;color:var(--red);}
+.service-content h3{font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-.01em;}
+.service-content p{font-size:13px;color:var(--muted);line-height:1.7;max-width:560px;}
+.service-arrow{font-size:24px;color:var(--border);transition:color .2s,transform .2s;}
+.service-item:hover .service-arrow{color:var(--red);transform:translate(4px,-4px);}
+
+/* CONTACT */
+#contact{background:var(--gray);padding:var(--gap) 48px;}
+.contact-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,100px);line-height:.88;color:var(--white);margin:24px 0 32px;}
+.contact-sub{font-size:14px;color:var(--muted);line-height:1.9;}
+.contact-form{display:flex;flex-direction:column;gap:20px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-size:9px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;font-weight:700;}
+.form-input,.form-select,.form-textarea{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--white);font-size:14px;font-family:'Space Grotesk',sans-serif;padding:12px 0;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-bottom-color:var(--red);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted);}
+.form-select{cursor:pointer;}
+.form-select option{background:var(--gray);color:var(--white);}
+.form-textarea{resize:none;min-height:100px;}
+.form-submit{display:inline-block;padding:16px 40px;background:var(--red);color:var(--white);font-size:12px;letter-spacing:.2em;font-weight:700;text-transform:uppercase;border:2px solid var(--red);cursor:pointer;font-family:'Space Grotesk',sans-serif;align-self:flex-start;transition:background .2s,color .2s,transform .15s;}
+.form-submit:hover{background:transparent;color:var(--red);transform:translateY(-2px);}
+.form-success{display:none;padding:40px;border:1px solid var(--red);}
+.form-success p{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1.2;color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid var(--border);padding:48px;}
+.footer-inner{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.05em;color:var(--white);}
+.footer-tagline{font-size:12px;color:var(--muted);line-height:1.7;margin-top:6px;}
+.footer-links{display:flex;gap:28px;}
+.footer-links a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-copy{font-size:11px;color:rgba(240,238,221,.2);}
+
+/* BACK TO TOP */
+#backToTop{position:fixed;right:24px;bottom:24px;width:48px;height:48px;background:var(--red);color:var(--white);font-size:18px;font-weight:700;border:none;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,visibility .25s,transform .25s,background .2s;z-index:2500;display:flex;align-items:center;justify-content:center;}
+#backToTop.show{opacity:1;visibility:visible;transform:translateY(0);}
+#backToTop:hover{background:var(--white);color:var(--black);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr;}
+  .hero-side{display:none;}
+  .contact-inner{grid-template-columns:1fr;gap:48px;}
+  .about-inner{grid-template-columns:80px 1fr;gap:40px;}
+}
+@media(max-width:768px){
+  #main-nav{padding:0 24px;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  #hero{padding:72px 24px 0;}
+  .hero-content{padding:48px 0;}
+  .hero-headline{font-size:clamp(60px,18vw,100px);}
+  #works{padding:80px 24px;}
+  .works-grid{grid-template-columns:1fr;}
+  .work-card--wide{grid-column:span 1;}
+  .work-thumb{aspect-ratio:16/10!important;}
+  .about-inner{padding:0 24px;grid-template-columns:1fr;}
+  .about-label-col{display:none;}
+  #services{padding:80px 24px;}
+  .service-item{grid-template-columns:48px 1fr;}
+  .service-arrow{display:none;}
+  #contact{padding:80px 24px;}
+  .form-row{grid-template-columns:1fr;}
+  footer{padding:36px 24px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:20px;}
+}
+</style>
+</head>
+<body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#">KANSO STUDIO</a>
+  <ul class="nav-links">
+    <li><a href="#works">WORKS</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#services">SERVICES</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">START A PROJECT</a>
+  <button class="hamburger" id="hamburger" aria-label="選單"><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#works" onclick="closeMobileMenu()">WORKS</a>
+  <a href="#about" onclick="closeMobileMenu()">ABOUT</a>
+  <a href="#services" onclick="closeMobileMenu()">SERVICES</a>
+  <a href="#contact" onclick="closeMobileMenu()">CONTACT</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">
+      <span class="dot-red"></span>
+      <span>SPORTS VISUAL DESIGN — BASED IN TAIWAN</span>
+    </div>
+    <h1 class="hero-headline reveal reveal-delay-1">
+      <span class="line line-1">SPORTS</span>
+      <span class="line line-2">VISUALS</span>
+      <span class="line line-3">THAT HIT<span class="accent">.</span></span>
+    </h1>
+    <div class="hero-sub-wrap reveal reveal-delay-2">
+      <p class="hero-sub">運動賽事 Banner · 冠軍賽主視覺 · 活動宣傳設計<br>讓觀眾在開賽前，就先感受到熱度與張力。</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#works">SEE WORK</a>
+        <a class="btn-ghost" href="#contact">LET'S TALK →</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="hero-ticker">
+      <span>SPORTS VISUAL</span><span class="sep">✦</span>
+      <span>TOURNAMENT BRANDING</span><span class="sep">✦</span>
+      <span>CHAMPIONSHIP KV</span><span class="sep">✦</span>
+      <span>EVENT BANNER</span><span class="sep">✦</span>
+      <span>ART DIRECTION</span><span class="sep">✦</span>
+    </div>
+    <div class="hero-number-block">
+      <div class="stat">
+        <span class="stat-num">80<span class="plus">+</span></span>
+        <span class="stat-label">PROJECTS</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">5<span class="plus">+</span></span>
+        <span class="stat-label">YEARS</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-track"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>SPORTS EVENT BANNER</span><span class="bullet">●</span>
+    <span>CHAMPIONSHIP VISUAL</span><span class="bullet">●</span>
+    <span>ART DIRECTION</span><span class="bullet">●</span>
+    <span>TOURNAMENT BRANDING</span><span class="bullet">●</span>
+    <span>CAMPAIGN KEY VISUAL</span><span class="bullet">●</span>
+    <span>HIGH CONTRAST DESIGN</span><span class="bullet">●</span>
+    <span>CAMPAIGN VISUALS</span><span class="bullet">●</span>
+    <span>SPORTS EVENT BANNER</span><span class="bullet">●</span>
+    <span>CHAMPIONSHIP VISUAL</span><span class="bullet">●</span>
+    <span>ART DIRECTION</span><span class="bullet">●</span>
+    <span>TOURNAMENT BRANDING</span><span class="bullet">●</span>
+    <span>CAMPAIGN KEY VISUAL</span><span class="bullet">●</span>
+    <span>HIGH CONTRAST DESIGN</span><span class="bullet">●</span>
+    <span>CAMPAIGN VISUALS</span><span class="bullet">●</span>
+  </div>
+</div>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-header reveal">
+    <div class="section-label-wrap">
+      <span class="section-index">002</span>
+      <span class="section-label">SELECTED WORKS</span>
+    </div>
+    <h2 class="section-title">作品<br><span>案例</span></h2>
+  </div>
+  <div class="works-filter reveal">
+    <button class="filter-btn active" data-filter="all">ALL</button>
+    <button class="filter-btn" data-filter="extreme">EXTREME</button>
+    <button class="filter-btn" data-filter="championship">CHAMPIONSHIP</button>
+    <button class="filter-btn" data-filter="fight">FIGHT</button>
+    <button class="filter-btn" data-filter="esports">ESPORTS</button>
+  </div>
+  <div class="works-grid" id="works-grid">
+    <article class="work-card reveal" data-cat="extreme" style="--card-color:#FF2E2E;">
+      <div class="work-thumb work-img">
+        <img src="7B0036FE-EAF8-468B-BB3C-2B5D0B29B52A.jpeg" alt="AURELIS Skincare website" loading="lazy"/>
+        <div class="work-overlay"><span class="work-view-text">VIEW PROJECT →</span></div>
+      </div>
+      <div class="work-meta">
+        <span class="work-type">TOURNAMENT BRANDING</span>
+        <h3>AURELIS<br>Skincare</h3>
+        <p>高端保養品牌電商網站設計，桌機與行動版視覺系統</p>
+      </div>
+    </article>
+    <article class="work-card reveal reveal-delay-1" data-cat="championship" style="--card-color:#C9A227;">
+      <div class="work-thumb work-img">
+        <img src="07057D1D-ABF9-46F7-98ED-D30CB1901BB1.jpeg" alt="YOHAKU store" loading="lazy"/>
+        <div class="work-overlay"><span class="work-view-text">VIEW PROJECT →</span></div>
+      </div>
+      <div class="work-meta">
+        <span class="work-type">CAMPAIGN KEY VISUAL</span>
+        <h3>YOHAKU<br>Lifestyle</h3>
+        <p>日系極簡美學，電商首頁到商品展示全系列視覺規劃</p>
+      </div>
+    </article>
+    <article class="work-card reveal" data-cat="championship" style="--card-color:#FF2E2E;">
+      <div class="work-thumb work-img">
+        <img src="657DFD1B-1EC4-4001-9798-23E63BE77343.jpeg" alt="Anniversary Campaign" loading="lazy"/>
+        <div class="work-overlay"><span class="work-view-text">VIEW PROJECT →</span></div>
+      </div>
+      <div class="work-meta">
+        <span class="work-type">MARATHON EVENT</span>
+        <h3>Marathon<br>2024</h3>
+        <p>馬拉松活動宣傳 Banner，以衝線瞬間、逆光與橘黑色調營造熱血感</p>
+      </div>
+    </article>
+    <article class="work-card reveal reveal-delay-1" data-cat="fight" style="--card-color:#C9A227;">
+      <div class="work-thumb work-img">
+        <img src="02DE4DEE-CDBC-438F-A986-4E0A3B67A64B.jpeg" alt="FLOW Lifestyle" loading="lazy"/>
+        <div class="work-overlay"><span class="work-view-text">VIEW PROJECT →</span></div>
+      </div>
+      <div class="work-meta">
+        <span class="work-type">CAMPAIGN KEY VISUAL HERO</span>
+        <h3>FLOW<br>Lifestyle</h3>
+        <p>生活品牌主視覺橫幅，柔和光影與清晰銷售訊息</p>
+      </div>
+    </article>
+    <article class="work-card work-card--wide reveal" data-cat="esports" style="--card-color:#F0EEDD;">
+      <div class="work-thumb work-img">
+        <img src="940EBC85-D721-4F09-93AD-1D8D88AC8F73.jpeg" alt="YOHAKU product" loading="lazy"/>
+        <div class="work-overlay"><span class="work-view-text" style="color:#0A0A0A;">VIEW PROJECT →</span></div>
+      </div>
+      <div class="work-meta">
+        <span class="work-type">ESPORTS TOURNAMENT</span>
+        <h3>Esports<br>Championship</h3>
+        <p>電競冠軍賽主視覺，藍紫霓虹、舞台燈光與未來感場景建立賽事規格</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-label-col reveal">
+      <span class="section-index">003</span>
+      <span class="section-label-vert">ABOUT</span>
+    </div>
+    <div class="about-content">
+      <div class="about-quote reveal">好的賽事視覺，<br>讓觀眾在開賽前就熱血沸騰。</div>
+      <div class="about-body reveal reveal-delay-1">
+        <p>KANSO STUDIO 專注於運動賽事主視覺、活動宣傳與高張力商業設計，打造令人一眼記住的視覺體驗。</p>
+        <p>從冠軍賽海報、極限運動 Banner 到電競賽事主視覺，每個作品都強調速度、熱血與競技張力。</p>
+      </div>
+      <div class="about-tags reveal reveal-delay-2">
+        <span>Sports Event Banner</span>
+        <span>Championship Visual</span>
+        <span>Tournament Branding</span>
+        <span>Campaign Key Visual</span>
+        <span>Art Direction</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <span class="section-index">004</span>
+    <h2 class="services-title">WHAT<br>WE DO<span class="accent">.</span></h2>
+  </div>
+  <div class="services-list">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-content">
+        <h3>Sports Event Banner</h3>
+        <p>運動賽事 Banner 設計 — 適合社群宣傳、活動主視覺、官網橫幅與廣告投放，強調高張力、高反差與速度感。</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">02</div>
+      <div class="service-content">
+        <h3>Championship Visual Design</h3>
+        <p>冠軍賽主視覺 — 透過戲劇光影、強烈色彩與運動員姿態，打造決賽、季後賽、挑戰賽的壓迫感與榮耀感。</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">03</div>
+      <div class="service-content">
+        <h3>Tournament Branding</h3>
+        <p>賽事品牌視覺 — 包含活動標題、視覺風格、資訊層級與系列素材延伸，讓整場賽事更有識別度。</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">04</div>
+      <div class="service-content">
+        <h3>Campaign & Key Visual</h3>
+        <p>活動廣告主視覺 — 為運動品牌、賽事單位與活動宣傳打造可用於海報、Banner、社群與簡報提案的完整視覺方向。</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <span class="section-index">005</span>
+      <h2 class="contact-headline">LET'S<br>MAKE<br>SOMETHING<span class="accent">.</span></h2>
+      <p class="contact-sub">有想法了嗎？或者還在找方向？<br>都歡迎先聊聊。</p>
+    </div>
+    <div class="contact-right reveal reveal-delay-1">
+      <form class="contact-form" action="https://formspree.io/f/xvzdegqv" id="contact-form" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="name">NAME</label>
+            <input class="form-input" id="name" name="name" placeholder="你的名字或品牌" required type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">EMAIL</label>
+            <input class="form-input" id="email" name="email" placeholder="your@email.com" required type="email"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="service">SERVICE</label>
+          <select class="form-select" id="service" name="service" required>
+            <option value="">選擇服務項目</option>
+            <option>品牌識別設計</option>
+            <option>電商視覺設計</option>
+            <option>網站設計</option>
+            <option>活動與廣告視覺</option>
+            <option>創意統籌</option>
+            <option>其他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="budget">BUDGET</label>
+          <select class="form-select" id="budget" name="budget">
+            <option value="">預算範圍</option>
+            <option>NT$15,000 以下</option>
+            <option>NT$15,000–30,000</option>
+            <option>NT$30,000–80,000</option>
+            <option>NT$80,000 以上</option>
+            <option>尚未確定</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">YOUR BRIEF</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="告訴我關於你的品牌或專案…"></textarea>
+        </div>
+        <button class="form-submit" type="submit">SEND IT →</button>
+      </form>
+      <div class="form-success" id="form-success">
+        <p>收到了。<br>我會盡快聯繫你。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">CHU<span class="accent">.</span></div>
+      <p class="footer-tagline">高張力運動視覺，<br>讓賽事被一眼記住。</p>
+    </div>
+    <div class="footer-links">
+      <a href="#works">Works</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 KANSO STUDIO. All rights reserved.</p>
+  </div>
+</footer>
+
+<button id="backToTop" aria-label="回到頂部">↑</button>
+
+<script>
+// Nav
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+
+// Scroll Reveal
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Back to Top
+const btt = document.getElementById('backToTop');
+window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500));
+btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// Works Filter
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.work-card').forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+    });
+  });
+});
+
+// Contact Form
+const form = document.getElementById('contact-form');
+const success = document.getElementById('form-success');
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'SENDING...'; btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} });
+      if (res.ok) { form.style.display='none'; success.style.display='block'; }
+      else { btn.textContent='SEND IT →'; btn.disabled=false; }
+    } catch { btn.textContent='SEND IT →'; btn.disabled=false; }
+  });
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); closeMobileMenu(); }
+  });
+});
+
+// Content protection
+(function() {
+  const stop = e => { e.preventDefault(); e.stopPropagation(); return false; };
+  ['contextmenu','dragstart','selectstart','copy','cut'].forEach(t => document.addEventListener(t, stop, {capture:true}));
+  document.addEventListener('keydown', function(e) {
+    const k = (e.key||'').toLowerCase();
+    const blocked = k==='f12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k))||(e.metaKey&&e.altKey&&['i','j','c'].includes(k))||((e.ctrlKey||e.metaKey)&&['s','u','p','c','x'].includes(k));
+    if (blocked) stop(e);
+  }, {capture:true});
+  document.querySelectorAll('img,svg,video,canvas').forEach(el => {
+    el.setAttribute('draggable','false');
+    el.addEventListener('contextmenu', stop, {capture:true});
+    el.addEventListener('dragstart', stop, {capture:true});
+  });
+})();
+</script>
+</body>
+</html>

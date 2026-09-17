@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社群內容製作方案｜2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F3EC;
+    --paper-deep: #EFE6D8;
+    --ink: #2B2620;
+    --ink-soft: #5C5346;
+    --coral: #C4664D;
+    --coral-deep: #A8503A;
+    --tan: #8B7355;
+    --rule: #DDD4C3;
+    --rule-soft: #E8E1D2;
+    --wrap-pad: 28px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* subtle paper texture via layered radial noise */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(139,115,85,0.025) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(196,102,77,0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--wrap-pad);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    padding: 88px 0 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    color: var(--coral-deep);
+    letter-spacing: 0.08em;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 11em;
+  }
+
+  .lede {
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 30em;
+  }
+
+  .lede .divider-dot {
+    color: var(--rule);
+    margin: 0 0.5em;
+  }
+
+  /* ---------- Section labels ---------- */
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    row-gap: 6px;
+    column-gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 22px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--tan);
+  }
+
+  .section-desc {
+    margin-top: 20px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 34em;
+  }
+
+  /* ---------- Trial plan ---------- */
+  .trial-block {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 0 8px;
+  }
+
+  .trial-detail {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 2;
+  }
+
+  .trial-price {
+    text-align: right;
+  }
+
+  .price-figure {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 40px;
+    color: var(--coral-deep);
+    letter-spacing: 0.02em;
+  }
+
+  .price-unit {
+    font-size: 13px;
+    color: var(--tan);
+    margin-top: 4px;
+  }
+
+  /* ---------- Monthly plans ---------- */
+  .plans {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plan-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 24px;
+    padding: 32px 0;
+    border-top: 1px solid var(--rule-soft);
+    position: relative;
+  }
+
+  .plan-row.featured {
+    background: var(--paper-deep);
+    margin: 0 calc(-1 * var(--wrap-pad));
+    padding: 32px var(--wrap-pad);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .plan-row.featured + .plan-row {
+    border-top: none;
+  }
+
+  .plan-name-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 6px;
+    column-gap: 10px;
+    grid-column: 1 / -1;
+  }
+
+  .plan-name {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 19px;
+  }
+
+  .plan-tag {
+    font-size: 11.5px;
+    color: var(--coral-deep);
+    border: 1px solid var(--coral-deep);
+    border-radius: 2px;
+    padding: 1px 8px;
+    line-height: 1.6;
+  }
+
+  .plan-items {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 2;
+  }
+
+  .plan-price {
+    text-align: right;
+    white-space: nowrap;
+    align-self: end;
+  }
+
+  .plan-price .amount {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--ink);
+  }
+
+  .plan-row.featured .plan-price .amount {
+    color: var(--coral-deep);
+  }
+
+  .plan-price .unit {
+    font-size: 12px;
+    color: var(--tan);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ---------- FB add-ons ---------- */
+  .addon-grid {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .addon-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 20px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule-soft);
+    align-items: baseline;
+  }
+
+  .addon-name {
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .addon-note {
+    font-size: 13px;
+    color: var(--tan);
+    display: block;
+    margin-top: 3px;
+  }
+
+  .addon-price {
+    text-align: right;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .addon-price .unit {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--tan);
+  }
+
+  .combo-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--paper-deep);
+    border-left: 2px solid var(--coral);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+  }
+
+  /* ---------- Terms ---------- */
+  .terms-list {
+    margin-top: 24px;
+    list-style: none;
+  }
+
+  .terms-list li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .terms-list li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--coral);
+    font-weight: 700;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 56px 0 80px;
+  }
+
+  .footer-note {
+    font-size: 13px;
+    color: var(--tan);
+    line-height: 2;
+  }
+
+  .validity {
+    margin-top: 28px;
+    display: inline-block;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    color: var(--coral-deep);
+    border-top: 1px solid var(--coral-deep);
+    padding-top: 8px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 600px) {
+    :root { --wrap-pad: 20px; }
+    header { padding: 56px 0 40px; }
+    h1 { max-width: none; }
+    .section { padding: 48px 0; }
+
+    .plan-row { grid-template-columns: 1fr; row-gap: 4px; }
+    .plan-price {
+      text-align: left;
+      justify-self: start;
+      margin-top: 10px;
+      white-space: normal;
+    }
+
+    .trial-block { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .trial-price { text-align: left; }
+
+    .addon-row { grid-template-columns: 1fr; row-gap: 6px; }
+    .addon-price { text-align: left; }
+
+    .plan-row.featured { margin: 0 calc(-1 * var(--wrap-pad)); padding: 28px var(--wrap-pad); }
+  }
+
+  @media (max-width: 360px) {
+    .price-figure { font-size: 32px; }
+    .plan-price .amount { font-size: 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Kanso Studio ／ 2026 社群內容製作方案</div>
+    <h1>有人味、有溫度的內容，用克制的語氣說話。</h1>
+    <p class="lede">
+      依品牌調性客製文案與圖片美編<span class="divider-dot">·</span>不浮誇、不套模板<span class="divider-dot">·</span>每篇皆為手作而非量產
+    </p>
+  </header>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-title">雙週體驗方案</span>
+      <span class="section-sub">新客戶限定・每品牌限一次</span>
+    </div>
+    <p class="section-desc">在進入包月合作前，先用兩週感受我們的節奏與筆觸。</p>
+
+    <div class="trial-block">
+      <div class="trial-detail">
+        4 篇 IG 單張貼文<br>
+        圖片美編・品牌客製文案
+      </div>
+      <div class="trial-price">
+        <div class="price-figure">NT$ 6,666</div>
+        <div class="price-unit">／ 14 天</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-title">包月方案</span>
+      <span class="section-sub">依內容深度分為三種節奏</span>
+    </div>
+
+    <div class="plans">
+      <div class="plan-row">
+        <div class="plan-name-line">
+          <span class="plan-name">IG 基礎</span>
+        </div>
+        <div class="plan-items">
+          每月 8 篇單張貼文・客戶提供主題與素材<br>
+          圖片美編＋品牌客製文案
+        </div>
+        <div class="plan-price">
+          <span class="amount">NT$ 12,800</span>
+          <span class="unit">／ 月</span>
+        </div>
+      </div>
+
+      <div class="plan-row featured">
+        <div class="plan-name-line">
+          <span class="plan-name">IG 標準</span>
+          <span class="plan-tag">推薦</span>
+        </div>
+        <div class="plan-items">
+          每月主題規劃・6 篇單張＋2 篇輪播（最多 3 頁）<br>
+          客製文案、CTA 與 Hashtag 建議
+        </div>
+        <div class="plan-price">
+          <span class="amount">NT$ 16,800</span>
+          <span class="unit">／ 月</span>
+        </div>
+      </div>
+
+      <div class="plan-row">
+        <div class="plan-name-line">
+          <span class="plan-name">IG＋FB</span>
+        </div>
+        <div class="plan-items">
+          包含 IG 標準方案內容規模・同主題改寫 FB 文案，保留平台語感<br>
+          調整 FB 圖片尺寸
+        </div>
+        <div class="plan-price">
+          <span class="amount">NT$ 19,800</span>
+          <span class="unit">／ 月</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-title">Facebook 加購</span>
+      <span class="section-sub">單獨為 FB 加開內容，不綁 IG 方案</span>
+    </div>
+
+    <div class="addon-grid">
+      <div class="addon-row">
+        <div>
+          <div class="addon-name">同內容改寫</div>
+          <span class="addon-note">沿用當月 IG 文案主題，調整為 FB 語感與圖片尺寸</span>
+        </div>
+        <div class="addon-price">NT$ 4,800<span class="unit"> ／ 月</span></div>
+      </div>
+      <div class="addon-row">
+        <div>
+          <div class="addon-name">原創 8 篇</div>
+          <span class="addon-note">FB 專屬全新主題與文案，獨立於 IG 內容之外</span>
+        </div>
+        <div class="addon-price">NT$ 16,800<span class="unit"> ／ 月</span></div>
+      </div>
+    </div>
+
+    <div class="combo-note">
+      「同內容改寫」為單獨加購價，若在 IG 標準方案中直接搭配 FB（見上方「IG＋FB」），改寫加購已包含在 NT$ 19,800 內，較單獨加購再省一些。「原創 8 篇」為獨立於 IG 之外的全新內容產出，非加總方案。
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-title">合作備註</span>
+    </div>
+    <ul class="terms-list">
+      <li>首次合作限定，每品牌一次；客戶提供主題方向與素材</li>
+      <li>每篇含 1 次修改，第 2 次起 NT$500／次</li>
+      <li>輪播超出 3 頁另計</li>
+      <li>不含拍攝、影片、發佈及廣告操作</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p class="footer-note">
+      詳細付款、著作權與交付方式，以正式報價單為準。
+    </p>
+    <div class="validity">VALID UNTIL 2026.10.01</div>
+  </footer>
+
+</div>
+</body>
+</html>
